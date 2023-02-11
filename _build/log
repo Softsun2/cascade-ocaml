@@ -1,0 +1,5 @@
+# dune init proj cascade
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Workspace root: /Users/softsun2/personal/cascade
+# Auto-detected concurrency: 10
