@@ -1,64 +1,24 @@
-# ARTS 1704 - Project 2 - Music Video
+```
+This concept is based on my experience with William Basinski's song Cascade. I was also inspired by Alvin Lucier's? project I Am Sitting In A Room and the nature of tape loops in general.
 
 Sterile instructions and sedative grace magnetized once to degrade forever. Beautiful visions of the impossible self.
 
-Simple way to express whatever bleakness I've been feeling. Cascade by William Basinski.
+The original, mannual implementation, consists of a clip I recorded on my bike of a frozen lake is recycled repeatedly cutting on the most pronounced piano drop. Datamoshing and compression are used as methods of distortion and disintegration in the process of obtaining a sequence of clips in decreasing order of quality. To obtain the next clip in the sequence the previous clip is datamoshed with the original clip. Datamoshing requires the clips being moshed together to be rendered as a single clip that cuts between the two, this is what produces compression. Any pixels of the original clip that survive datamoshing exist (although compressed) in the following clips. For example an original pixel that exists in the ninth clip has been rerendered (compressed) eigth times. The function used for obtaining any clip in the sequence is explicitly defined below.
 
-## Filming
+```
+Let dm be a function that returns the datamoshed transition of two clips. In practice dm handles prerending the input clips.
+Let second_half be a function that returns the second half of a clip.
 
-I think 4:3 with high fov fits this, keep in mind while filming.
+Let f be a recursive function of n, where n is in Z and n >= 0, that returns the nth clip of the sequence.
 
-### Clips
+f(n) = { original_clip, when n = 0
+       { second_half(dm(orignal_clip, f(n - 1))), when n > 0
+```
 
-Concept: c1<-c2<-[c3]<-c4<-...<-cn where the brackets are the frame
+There's a mistake in this function. The sequence will never reach pure destruction. In the case that n > 0 the previous clip is moshed with the original clip. While structurally there will be no semblence of the original video, just an uncontrolled mess of pixels, the injected pixels from the mosh are a constant quality. Since only the surviving pixels are compressed the clip will never be compressed into oblivion. This is most noticable later on in the sequence where compression can't be seen until all the moshed pixels are wiped away. Although it was completly by mistake it is interesting to think about. Injecting the ideal pixels into a dying clip. I am unceartain if the injected pixels would take over and destroy all movement in the clip or if the movement is strong enough to wipe away the moshed pixels forever.
 
-The waves on the album cover appear to be rolling to the right. I figured each clip would be taken on my bike facing left the scene appears to be moving towards the left side of the frame. I would like to take as much of these as possible in low light, maybe I could crank down the iso or whatever to fake this.
+I followed this process mannually so there were probably numerous other mistakes made.
 
-Try to shoot for ~15 second clips (tape loop is about 12 seconds). Would only need 14 or so clips then. I can't use twixtor here to extend clips because I want to preserve the speed of motion.
 
-Meat clips dark
-
-* New neighborhood clone houses.
-* New neighborhood weird street.
-* Casperson path lamps.
-* Casperson park lamps.
-* Street by lifetime.
-* Street by century.
-* Street by north.
-* Path at north
-* Stadium at north? 
-* Path by new neighborhood.
-* Roundabout area?
-
-Meat Clips light
-
-* Stream by end of NP trail.
-* Old neighborhood 1.
-* Old neighborhood 2.
-* CC mile training path.
-* Cherry view park tunnel.
-* That one park path.
-
-Breaking consistency clips
-
-* My gross hair in my face (maybe to display words at the beginning or something) ((directors cut LOL))
-* Stopping in front of house (ender?)
-
-## Editing
-Cascade is a tape loop. Pick whatever portion of the loop to cut on repeatedly.
-
-### Tone
-Cold, fleeting, beautiful, yearning, longing...
-
-* cc[0]: clear/clean, b&w.
-* cc[-1]: grainy, scratched, deteriorating, b&w.
-* framerate: 20-15? Maybe play with this dynamically as well.
-
-### Effects
-I would like to visualize the rolling motion of the tape loops transitioning between clips. Was thinking of using datamoshing or some sort of warp. Also to portray my interpretation of the song I would like the quality to deteriorate over the length of the video. Primarily with grain and maybe some film damage, wanted to experiment with changing the framerate as well. Could add some frame repeition moshing as well.
-
-### References
-* derrick b00 - acrylic (lettering/print/bitmap art)
-  * "custom bitmap lettering on a grid in Illustrator, warping fx etc"
-* nstlgy - ghost village
-  * precise, high quality datamoshing
+There is no one. I've made no one. I am no one.
+```
